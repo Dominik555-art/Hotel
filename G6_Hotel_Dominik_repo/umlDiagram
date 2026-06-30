@@ -1,0 +1,105 @@
++----------------------+
+|        Room          |
++----------------------+
+| - number: int        |
+| - capacity: int      |
+| - type: RoomCategory |
+| - status: RoomStatus |
++----------------------+
+| + Room(n,c,type)     |
+| + getNumber(): int   |
+| + getCapacity(): int |
+| + getType(): string  |
+| + getStatus(): string|
++----------------------+
+
+          △
+          |
+          | «agregacja»
+          |
+
++-------------------------------------+
+|           Reservation               |
++-------------------------------------+
+| # name: string                      |
+| # room: int                         |
+| # date: string                      |
+| # discount: double                  |
+| # groupType: GuestGroupType         |
+| # mealPlan: MealPlan                |
++-------------------------------------+
+| + Reservation(n, r, d)              |
+| + reservationType(): string         |
+| + getRoom(): int                    |
+| + getDate(): string                 |
+| + getName(): string                 |
+| + addDiscount(d: double): void      |
+| + display(): void                   |
+| + calculatePrice(): double          |
++-------------------------------------+
+
+    △          △           △          △
+    |           |           |           |
+    |        «dziedziczenie»            |
+    |           |           |           |
+
++----------+ +----------+ +----------+ +----------+
+|   Solo   | |  Family  | |  Group   | |  Couple  |
++----------+ +----------+ +----------+ +----------+
+| - age:   | | - adults | | - number | | - romant:|
+|   int    | |   : int  | |   OfPers | |   bool   |
+|          | | - child- | |   : int  | |          |
+|          | |   ren    | | - organ. | |          |
+|          | |   : int  | |   : str  | |          |
++----------+ +----------+ +----------+ +----------+
+| +resType()| |+resType()| |+resType()| |+resType()|
+| +business | |+family   | |+group    | |+romantic |
+|  Package()| | Package()| | Rate()   | | Package()|
+|           | |+addCrib()| |+getOrg() | |+addSurpr-|
+|           | |          | |          | |  ise()   |
++----------+ +----------+ +----------+ +----------+
+
+
++---------------------------------------------+
+|                    Hotel                    |
++---------------------------------------------+
+| - reservations: vector<Reservation*>        |
+| - rooms: vector<Room>                       |
+| - amenities: vector<Amenity>                |
+| - pricelist: map<MealPlan, double>          |
++---------------------------------------------+
+| + Hotel()                                   |
+| + isAvailable(room:int, date:str): bool     |
+| + checkAvailability(): void                 |
+| + addReservation(r: Reservation*): void     |
+| + refuseReservation(reason: string): void   |
+| + addDiscount(resId:int, d:double): void    |
+| + showReservations(): void                  |
+| + checkIn(resId: int): void                 |
+| + checkOut(resId: int): void                |
+| + addAmenity(a: Amenity): void              |
+| + calculateTotalPrice(resId:int): double    |
+| + generateReport(): void                    |
+| + findReservation(n:str): Reservation*      |
++---------------------------------------------+
+                     |
+                     | «kompozycja»
+                     ◇
+
++--------------------------------------------+
+|                 Amenity                    |
++--------------------------------------------+
+| - name: string                             |
+| - type: AmenityType                        |
+| - price: double                            |
+| - available: bool                          |
+| - pricingModel: PricingModel               |
++--------------------------------------------+
+| + Amenity(n, t, p)                         |
+| + getName(): string                        |
+| + getPrice(): double                       |
+| + isAvailable(): bool                      |
+| + setAvailable(a: bool): void              |
++--------------------------------------------+
+
+
